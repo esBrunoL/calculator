@@ -79,11 +79,23 @@ A professional Flutter calculator application designed for AWS deployment with s
 
 ## AWS Deployment
 
-This application is configured for AWS deployment using:
-- **ECS Fargate** for container orchestration
+This application supports two AWS deployment options:
+
+### 🚀 **Recommended: AWS Amplify** (Simplest)
+- **One-click deployment** from GitHub
+- **Automatic CI/CD** with global CDN
+- **HTTPS by default** with custom domains
+- **Cost-effective** and maintenance-free
+
+See `AMPLIFY_DEPLOYMENT.md` for complete Amplify setup guide.
+
+### ⚙️ **Alternative: ECS Fargate** (Advanced)
+- **ECS Fargate** for container orchestration  
 - **Application Load Balancer** for load distribution
 - **ECR** for container registry
 - **CodeBuild** for CI/CD pipeline
+
+See `DEPLOYMENT.md` for complete ECS setup guide.
 
 ### Deployment Steps
 

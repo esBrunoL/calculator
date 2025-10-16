@@ -1,0 +1,30 @@
+version: 1
+applications:
+  - appRoot: .
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - echo "Installing Flutter..."
+            - git clone https://github.com/flutter/flutter.git -b stable
+            - export PATH="$PATH:`pwd`/flutter/bin"
+            - flutter --version
+            - flutter config --enable-web
+            - echo "Installing dependencies..."
+            - flutter clean
+            - flutter pub get
+        build:
+          commands:
+            - echo "Building Flutter web app..."
+            - flutter build web --release --web-renderer html
+        postBuild:
+          commands:
+            - echo "Build completed successfully"
+      artifacts:
+        baseDirectory: build/web
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - flutter/**/*
+          - .dart_tool/**/*
