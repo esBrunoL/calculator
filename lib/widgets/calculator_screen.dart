@@ -78,7 +78,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: const Text(
-          'Calculator',
+          "Bruno's pocket Calculator",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,

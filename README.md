@@ -1,4 +1,4 @@
-# Calculator App
+# Bruno's pocket Calculator
 
 A professional Flutter calculator application designed for AWS deployment with state persistence and modern UI.
 

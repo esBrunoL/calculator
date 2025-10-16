@@ -1,11 +1,11 @@
 {
-    "name": "calculator_app",
-    "short_name": "calculator_app",
+    "name": "Bruno's pocket Calculator",
+    "short_name": "pocket Calculator",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Bruno's personal pocket calculator - A professional Flutter calculator app.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
