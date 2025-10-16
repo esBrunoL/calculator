@@ -6,7 +6,13 @@ applications:
         preBuild:
           commands:
             - echo "Installing Flutter..."
-            - git clone https://github.com/flutter/flutter.git -b stable
+            - |
+              if [ ! -d "flutter" ]; then
+                git clone https://github.com/flutter/flutter.git -b stable
+              else
+                echo "Flutter already exists, updating..."
+                cd flutter && git pull && cd ..
+              fi
             - export PATH="$PATH:`pwd`/flutter/bin"
             - flutter --version
             - flutter config --enable-web
