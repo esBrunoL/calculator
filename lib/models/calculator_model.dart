@@ -2,10 +2,12 @@ class CalculatorModel {
   String _display = '0';
   String _previousOperand = '';
   String _operation = '';
+  String _history = '';
   bool _waitingForNewOperand = false;
   bool _hasError = false;
 
   String get display => _display;
+  String get history => _history;
   bool get hasError => _hasError;
 
   void inputDigit(String digit) {
@@ -51,6 +53,8 @@ class CalculatorModel {
 
     if (_previousOperand.isEmpty) {
       _previousOperand = operand.toString();
+      // Start building history: "54 +"
+      _history = '${_formatDisplayNumber(operand)} $nextOperation ';
     } else if (_operation.isNotEmpty) {
       double previousValue = double.tryParse(_previousOperand) ?? 0;
       double result = _calculate(previousValue, operand, _operation);
@@ -59,6 +63,8 @@ class CalculatorModel {
       
       _display = _formatNumber(result);
       _previousOperand = result.toString();
+      // Update history with result: "54 + 12 = 66, then 66 +"
+      _history = '${_formatDisplayNumber(result)} $nextOperation ';
     }
 
     _waitingForNewOperand = true;
@@ -72,6 +78,9 @@ class CalculatorModel {
 
     double operand = double.tryParse(_display) ?? 0;
     double previousValue = double.tryParse(_previousOperand) ?? 0;
+    
+    // Complete history: "54 + 12 = "
+    _history = '$_history${_formatDisplayNumber(operand)} = ';
     
     double result = _calculate(previousValue, operand, _operation);
     
@@ -139,10 +148,19 @@ class CalculatorModel {
     _waitingForNewOperand = true;
   }
 
+  String _formatDisplayNumber(double number) {
+    // Format number for display in history (simpler than main display)
+    if (number == number.truncateToDouble()) {
+      return number.toInt().toString();
+    }
+    return number.toString();
+  }
+
   void clear() {
     _display = '0';
     _previousOperand = '';
     _operation = '';
+    _history = '';
     _waitingForNewOperand = false;
     _hasError = false;
   }

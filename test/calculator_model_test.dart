@@ -124,5 +124,47 @@ void main() {
       calculator.calculate();
       expect(calculator.display, '16'); // 8 * 2 = 16
     });
+
+    test('should show history during operations', () {
+      calculator.inputDigit('5');
+      calculator.inputDigit('4');
+      calculator.inputOperation('+');
+      expect(calculator.history, '54 + ');
+      
+      calculator.inputDigit('1');
+      calculator.inputDigit('2');
+      expect(calculator.display, '12');
+      
+      calculator.calculate();
+      expect(calculator.history, '54 + 12 = ');
+      expect(calculator.display, '66');
+    });
+
+    test('should clear history when clearing calculator', () {
+      calculator.inputDigit('5');
+      calculator.inputOperation('+');
+      expect(calculator.history, '5 + ');
+      
+      calculator.clear();
+      expect(calculator.history, '');
+      expect(calculator.display, '0');
+    });
+
+    test('should update history with chained operations', () {
+      calculator.inputDigit('1');
+      calculator.inputDigit('0');
+      calculator.inputOperation('+');
+      expect(calculator.history, '10 + ');
+      
+      calculator.inputDigit('5');
+      calculator.inputOperation('*'); // Should show result in history
+      expect(calculator.history, '15 * ');
+      expect(calculator.display, '15');
+      
+      calculator.inputDigit('2');
+      calculator.calculate();
+      expect(calculator.history, '15 * 2 = ');
+      expect(calculator.display, '30');
+    });
   });
 }
